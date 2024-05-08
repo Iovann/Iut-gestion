@@ -28,6 +28,7 @@ urlpatterns = [
     path("admin/home/", hod_views.admin_home, name='admin_home'),
     path("staff/add", hod_views.add_staff, name='add_staff'),
     path("course/add", hod_views.add_course, name='add_course'),
+    path("ue/add", hod_views.add_ue, name='add_ue'),
     path("send_student_notification/", hod_views.send_student_notification,
          name='send_student_notification'),
     path("send_staff_notification/", hod_views.send_staff_notification,

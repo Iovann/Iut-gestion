@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.widgets import DateInput, TextInput
-
+from django.forms import ModelMultipleChoiceField
 from .models import *
 
 
@@ -62,7 +62,7 @@ class StudentForm(CustomUserForm):
     class Meta(CustomUserForm.Meta):
         model = Student
         fields = CustomUserForm.Meta.fields + \
-            ['cycle','course', 'session']
+            ['cycle', 'years','course', 'session']
 
 
 class AdminForm(CustomUserForm):
@@ -92,6 +92,13 @@ class CourseForm(FormSettings):
         fields = ['name','cycle']
         model = Course
 
+class UEForm(FormSettings):
+    def __init__(self, *args, **kwargs):
+        super(UEForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = UniteEnseignement
+        fields = ['name', 'coefficient', 'matieres', 'course']
 
 class SubjectForm(FormSettings):
 
@@ -100,7 +107,7 @@ class SubjectForm(FormSettings):
     
     class Meta:
         model = Subject
-        fields = ['name', 'staff', 'course']
+        fields = ['name', 'staff', 'course' ,'years']
 
 
 class SessionForm(FormSettings):

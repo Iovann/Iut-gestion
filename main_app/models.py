@@ -66,21 +66,27 @@ class Cycle(models.Model):
     def __str__(self):
         return self.name
 
+class Years (models.Model):
+    name = models.CharField(max_length=15, null=True)
+    cycle = models.ForeignKey(Cycle, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name
 
 class Course(models.Model):
     name = models.CharField(max_length=120)
     cycle = models.ForeignKey(Cycle, on_delete=models.DO_NOTHING, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     def __str__(self):
         return self.name
-
+    
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=True, blank=False)
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING, null=True)
     cycle = models.ForeignKey(Cycle, on_delete=models.DO_NOTHING, null=True)
+    years = models.ForeignKey(Years, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.admin.last_name + ", " + self.admin.first_name
@@ -98,18 +104,19 @@ class Subject(models.Model):
     name = models.CharField(max_length=120)
     staff = models.ForeignKey(Staff,on_delete=models.CASCADE,)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    cycle = models.ForeignKey(Cycle, on_delete=models.CASCADE, null=True)
+    years = models.ForeignKey(Years, on_delete=models.DO_NOTHING, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+    
 
 class UniteEnseignement(models.Model):
     name = models.CharField(max_length=255)
     coefficient = models.IntegerField()
     matieres = models.ManyToManyField(Subject, related_name="unite_enseignements")
-    cycle = models.ForeignKey(Cycle, on_delete=models.CASCADE, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

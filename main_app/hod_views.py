@@ -133,6 +133,7 @@ def add_student(request):
             password = student_form.cleaned_data.get('password')
             course = student_form.cleaned_data.get('course')
             cycle = student_form.cleaned_data.get('cycle')
+            years = student_form.cleaned_data.get('years')
             session = student_form.cleaned_data.get('session')
             passport = request.FILES['profile_pic']
             fs = FileSystemStorage()
@@ -142,6 +143,7 @@ def add_student(request):
                 user = CustomUser.objects.create_user(
                     email=email, password=password, user_type=3, first_name=first_name, last_name=last_name, profile_pic=passport_url)
                 user.gender = gender
+                user.years = years
                 user.address = address
                 user.student.session = session
                 user.student.course = course
@@ -165,9 +167,11 @@ def add_course(request):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
+            cycle = form.cleaned_data.get('cycle')
             try:
                 course = Course()
                 course.name = name
+                course.cycle = cycle
                 course.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_course'))
@@ -176,6 +180,35 @@ def add_course(request):
         else:
             messages.error(request, "Could Not Add")
     return render(request, 'hod_template/add_course_template.html', context)
+
+def add_ue(request):
+    form = UEForm(request.POST or None)
+    context = {
+        'form': form,
+        'page_title': 'Ajouter UE'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            nom = form.cleaned_data.get('name')
+            coefficient = form.cleaned_data.get('coefficient')
+            course = form.cleaned_data.get('course')
+            matieres = form.cleaned_data.get('matieres')  # Récupérer les matières sélectionnées
+
+            try:
+                ue = UniteEnseignement.objects.create(  # Créer une instance UniteEnseignement
+                    name=nom,
+                    coefficient=coefficient,
+                    course = course,
+                )
+                ue.matieres.add(*matieres)  # Ajouter efficacement plusieurs matières en utilisant `add`
+                messages.success(request, "Ajouté avec succès")
+                return redirect(reverse('add_ue'))
+            except Exception as e:  # Capturer une exception spécifique (facultatif)
+                messages.error(request, f"Impossible d'ajouter : {e}")
+        else:
+            messages.error(request, "Impossible d'ajouter")
+    return render(request, 'hod_template/add_ue_template.html', context)
+
 
 def add_subject(request):
     form = SubjectForm(request.POST or None)
@@ -188,12 +221,14 @@ def add_subject(request):
             name = form.cleaned_data.get('name')
             course = form.cleaned_data.get('course')
             staff = form.cleaned_data.get('staff')
+            years = form.cleaned_data.get("years")
 
             try:
                 subject = Subject()
                 subject.name = name
                 subject.staff = staff
                 subject.course = course
+                subject.years = years
                 subject.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_subject'))
@@ -306,6 +341,8 @@ def edit_student(request, student_id):
             address = form.cleaned_data.get('address')
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
+            cycle = form.cleaned_data.get('cycle')
+            years = form.cleaned_data.get('years')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
             course = form.cleaned_data.get('course')
@@ -326,6 +363,8 @@ def edit_student(request, student_id):
                 user.last_name = last_name
                 student.session = session
                 user.gender = gender
+                user.student.cycle = cycle
+                user.student.years = years
                 user.address = address
                 student.course = course
                 user.save()
@@ -351,9 +390,11 @@ def edit_course(request, course_id):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
+            cycle = form.cleaned_data.get('cycle')
             try:
                 course = Course.objects.get(id=course_id)
                 course.name = name
+                course.cycle = cycle
                 course.save()
                 messages.success(request, "Successfully Updated")
             except:
@@ -362,6 +403,36 @@ def edit_course(request, course_id):
             messages.error(request, "Could Not Update")
 
     return render(request, 'hod_template/edit_course_template.html', context)
+
+
+def edit_ue(request, course_id):
+    instance = get_object_or_404(Course, id=course_id)
+    form = UEForm(request.POST or None, instance=instance)
+    context = {
+        'form': form,
+        'page_title': 'Edit UE'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            coefficient = form.cleaned_data.get('coefficient')
+            course = form.cleaned_data.get('course')
+            matieres = form.cleaned_data.get('matieres')
+
+            try:
+                ue = UniteEnseignement()
+                ue.name = name
+                ue.coefficient = coefficient
+                ue.course = course
+                ue.matieres = matieres
+                ue.save()
+                messages.success(request, "Successfully Added")
+                return redirect(reverse('add_ue'))
+            except:
+                messages.error(request, "Could Not Add")
+        else:
+            messages.error(request, "Could Not Add")
+    return render(request, 'hod_template/add_ue_template.html', context)
 
 
 def edit_subject(request, subject_id):
@@ -376,12 +447,14 @@ def edit_subject(request, subject_id):
         if form.is_valid():
             name = form.cleaned_data.get('name')
             course = form.cleaned_data.get('course')
+            years = form.cleaned_data.get('years')
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject.objects.get(id=subject_id)
                 subject.name = name
                 subject.staff = staff
                 subject.course = course
+                subject.years = years
                 subject.save()
                 messages.success(request, "Successfully Updated")
                 return redirect(reverse('edit_subject', args=[subject_id]))
