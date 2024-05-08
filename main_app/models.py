@@ -63,14 +63,13 @@ class Admin(models.Model):
 
 class Cycle(models.Model):
     name = models.CharField(max_length=15, choices=(("Licence", "Licence"), ("Master", "Master")))
-    duration_years = models.IntegerField()
     def __str__(self):
         return self.name
 
 
 class Course(models.Model):
     name = models.CharField(max_length=120)
-    cycle = models.ForeignKey(Cycle, on_delete=models.CASCADE, null=True)
+    cycle = models.ForeignKey(Cycle, on_delete=models.DO_NOTHING, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -99,6 +98,7 @@ class Subject(models.Model):
     name = models.CharField(max_length=120)
     staff = models.ForeignKey(Staff,on_delete=models.CASCADE,)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    cycle = models.ForeignKey(Cycle, on_delete=models.CASCADE, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

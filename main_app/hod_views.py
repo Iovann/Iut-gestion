@@ -132,6 +132,7 @@ def add_student(request):
             gender = student_form.cleaned_data.get('gender')
             password = student_form.cleaned_data.get('password')
             course = student_form.cleaned_data.get('course')
+            cycle = student_form.cleaned_data.get('cycle')
             session = student_form.cleaned_data.get('session')
             passport = request.FILES['profile_pic']
             fs = FileSystemStorage()
@@ -144,6 +145,7 @@ def add_student(request):
                 user.address = address
                 user.student.session = session
                 user.student.course = course
+                user.student.cycle = cycle
                 user.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_student'))
@@ -175,7 +177,6 @@ def add_course(request):
             messages.error(request, "Could Not Add")
     return render(request, 'hod_template/add_course_template.html', context)
 
-
 def add_subject(request):
     form = SubjectForm(request.POST or None)
     context = {
@@ -187,6 +188,7 @@ def add_subject(request):
             name = form.cleaned_data.get('name')
             course = form.cleaned_data.get('course')
             staff = form.cleaned_data.get('staff')
+
             try:
                 subject = Subject()
                 subject.name = name
