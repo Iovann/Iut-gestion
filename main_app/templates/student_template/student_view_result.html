@@ -17,7 +17,27 @@
    <div class="table p-2 align-items-center">
 
        <table class="table table-bordered align-items-center">
-           <tr>
+
+        <thead>
+            <tr>
+              <th>Nom de l'UE</th>
+              <th>Matières</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ue in ues %}
+            <tr>
+                <td>{{ ue.name }}</td>
+                {% for subject in ue.matieres.all %}
+                    <td rowspan="{{ subject.matieres.all.length }}">
+                        {{ subject.name }}  
+                    </td>  
+                {% endfor %}  
+            </tr>  
+            {% endfor %}
+
+          </tbody>
+           <!-- <tr>
                <th>Subject</th>
                <th class="align-middle text-truncate ">Test</th>
                <th>Exam</th>
@@ -37,7 +57,7 @@
                 <td class="alert alert-danger text-white fw-bold text-center mb-0" style="width: 20%;">Non Validé</td>        
             {% endif %}
         </tr>
-            {% endfor %}
+            {% endfor %} -->
         </table>
     </div>
     </div>
