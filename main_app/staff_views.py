@@ -260,7 +260,7 @@ def staff_add_result(request):
     context = {
         'page_title': 'Result Upload',
         'subjects': subjects,
-        'sessions': sessions
+        'sessions': sessions,
     }
     if request.method == 'POST':
         try:
@@ -272,7 +272,9 @@ def staff_add_result(request):
             subject = get_object_or_404(Subject, id=subject_id)
             try:
                 data = StudentResult.objects.get(
-                    student=student, subject=subject)
+                student=student,
+                subject=subject
+                )
                 data.exam = exam
                 data.test = test
                 data.save()

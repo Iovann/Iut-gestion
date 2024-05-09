@@ -267,6 +267,14 @@ def manage_course(request):
     }
     return render(request, "hod_template/manage_course.html", context)
 
+def manage_ue(request):
+    ue = UniteEnseignement.objects.all()
+    context = {
+        'ue': ue,
+        'page_title': 'Manage UE'
+    }
+    return render(request, "hod_template/manage_ue.html", context)
+
 
 def manage_subject(request):
     subjects = Subject.objects.all()
@@ -405,34 +413,34 @@ def edit_course(request, course_id):
     return render(request, 'hod_template/edit_course_template.html', context)
 
 
-def edit_ue(request, course_id):
-    instance = get_object_or_404(Course, id=course_id)
+def edit_ue(request, uniteenseignement_id):
+    instance = get_object_or_404(UniteEnseignement, id=uniteenseignement_id)
     form = UEForm(request.POST or None, instance=instance)
     context = {
         'form': form,
+        'uniteenseignement_id' : uniteenseignement_id,
         'page_title': 'Edit UE'
     }
     if request.method == 'POST':
         if form.is_valid():
-            name = form.cleaned_data.get('name')
+            nom = form.cleaned_data.get('name')
             coefficient = form.cleaned_data.get('coefficient')
             course = form.cleaned_data.get('course')
             matieres = form.cleaned_data.get('matieres')
 
             try:
-                ue = UniteEnseignement()
-                ue.name = name
+                ue = UniteEnseignement.objects.get(id = uniteenseignement_id)
+                ue.name = nom
                 ue.coefficient = coefficient
                 ue.course = course
-                ue.matieres = matieres
+                ue.matieres.add(*matieres) 
                 ue.save()
-                messages.success(request, "Successfully Added")
-                return redirect(reverse('add_ue'))
+                messages.success(request, "Successfully Updated")
             except:
-                messages.error(request, "Could Not Add")
+                messages.error(request, "Could Not Update")
         else:
-            messages.error(request, "Could Not Add")
-    return render(request, 'hod_template/add_ue_template.html', context)
+            messages.error(request, "Could Not Update")
+    return render(request, 'hod_template/edit_ue_template.html', context)
 
 
 def edit_subject(request, subject_id):
@@ -788,6 +796,15 @@ def delete_subject(request, subject_id):
     messages.success(request, "Subject deleted successfully!")
     return redirect(reverse('manage_subject'))
 
+def delete_UE(request, uniteenseignement_id):
+    ue= get_object_or_404(UniteEnseignement, id=uniteenseignement_id)
+    try:
+        ue.delete()
+        messages.success(request, "UE deleted successfully!")
+    except Exception:
+        messages.error(
+            request, "Sorry, some students are assigned to this course already. Kindly change the affected student course and try again")
+    return redirect(reverse('manage_ue'))
 
 def delete_session(request, session_id):
     session = get_object_or_404(Session, id=session_id)

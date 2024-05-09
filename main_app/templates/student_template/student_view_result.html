@@ -19,7 +19,7 @@
        <table class="table table-bordered align-items-center">
            <tr>
                <th>Subject</th>
-               <th>Test</th>
+               <th class="align-middle text-truncate ">Test</th>
                <th>Exam</th>
                <th>Total</th>
                <th class="text-center">Status</th>
@@ -27,6 +27,7 @@
         {% for result in results %}
         <tr class="align-items-center">
             <td class="align-self-center">{{ result.subject }}</td>
+            <td class="align-self-center">{{ result.ue}}</td>
             <td class="align-self-center">{{ result.test }}</td>
             <td class="align-self-center">{{ result.exam }}</td>
             <td class="align-self-center">{{ result.moyenne}}</td>           
