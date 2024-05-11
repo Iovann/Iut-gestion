@@ -201,9 +201,16 @@ def student_view_result(request):
     student = get_object_or_404(Student, admin=request.user)
     results = StudentResult.objects.filter(student=student)
     ues = UniteEnseignement.objects.select_related('course')
+
+    # Calculer les moyennes des scores pour chaque UE
+    ues_avec_moyennes = []
+    for ue in ues:
+        moyenne_score = ue.get_average_score(student)  # Appeler la fonction get_average_score
+        ues_avec_moyennes.append((ue, moyenne_score))
+
     context = {
         'results': results,
         'page_title': "Résultats",
-        'ues': ues,
+        'ues_avec_moyennes': ues_avec_moyennes,  # Utiliser la nouvelle variable
     }
     return render(request, "student_template/student_view_result.html", context)

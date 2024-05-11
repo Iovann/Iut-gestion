@@ -120,7 +120,7 @@ class UniteEnseignement(models.Model):
 
     def __str__(self):
         return self.name
-
+    
     def get_average_score(self, student):
         # Filtrer les résultats de l'étudiant pour les matières de cette UE
         student_results = student.studentresult_set.filter(subject__in=self.matieres.all())
