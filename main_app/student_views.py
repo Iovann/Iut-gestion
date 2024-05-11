@@ -201,10 +201,9 @@ def student_view_result(request):
     student = get_object_or_404(Student, admin=request.user)
     results = StudentResult.objects.filter(student=student)
     ues = UniteEnseignement.objects.select_related('course')
-    nbr = 
     context = {
         'results': results,
-        'page_title': "View Results",
-        'ues': ues
+        'page_title': "Résultats",
+        'ues': ues,
     }
     return render(request, "student_template/student_view_result.html", context)

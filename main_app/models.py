@@ -120,6 +120,27 @@ class UniteEnseignement(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_average_score(self, student):
+        # Filtrer les résultats de l'étudiant pour les matières de cette UE
+        student_results = student.studentresult_set.filter(subject__in=self.matieres.all())
+
+        # Calculer le score total et compter les résultats (éviter la division par zéro)
+        total_score = sum(result.moyenne for result in student_results)
+        result_count = student_results.count()
+
+        # Vérifier s'il y a des résultats avant de calculer la moyenne
+        all_subjects_have_results = True
+        for subject in self.matieres.all():
+            if not student_results.filter(subject=subject).exists():
+                all_subjects_have_results = False
+                break
+
+        # Calculate and return average (or None)
+        if all_subjects_have_results and result_count > 0:
+            return total_score / result_count
+        else:
+            return None
     
 class Attendance(models.Model):
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
