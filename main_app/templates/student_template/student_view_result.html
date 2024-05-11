@@ -17,31 +17,11 @@
                     </div>
                     <div class="table p-2 align-items-center">
                         <table class="table table-striped table-bordered align-items-center">
-                            <!-- <thead>
-            <tr>
-              <th>Nom de l'UE</th>
-              <th>Matières</th>
-            </tr>
-          </thead> -->
-                            <!-- <tbody>
-            {% for ue in ues %}
-            <tr>
-                <td rowspan="">{{ ue.name }}</td>
-                {% for subject in ue.matieres.all %}
-                    <td>
-                        {{ subject.name }}  
-                    </td>  
-                {% endfor %}  
-                </tr>  
-            {% endfor %}
-
-      </tbody> -->
                             <tr>
                                 <th>Matière</th>
                                 <th class="align-middle ">Contrôle</th>
                                 <th>Partiel</th>
                                 <th>Moyenne</th>
-                                <!-- <th class="text-center">Status</th> -->
                             </tr>
                             {% for result in results %}
                             <tr class="align-items-center">
@@ -49,11 +29,6 @@
                                 <td class="align-self-center">{{ result.test }}</td>
                                 <td class="align-self-center">{{ result.exam }}</td>
                                 <td class="align-self-center">{{ result.moyenne}}</td>
-                                <!--{% if result.moyenne >= 12 %}
-                <td class="alert alert-success text-white fw-bold text-center mb-0" style="width: 20%;">Validé</td>
-            {% else %}
-                <td class="alert alert-danger text-white fw-bold text-center mb-0" style="width: 20%;">Non Validé</td>        
-            {% endif %} -->
                             </tr>
                             {% endfor %}
                         </table>
@@ -110,7 +85,7 @@
                                     {% elif average_score >= 12 %}
                                     <td class="alert alert-success text-white fw-bold text-center mb-0"
                                         style="width: 20%;">Validé</td>
-                                        
+
                                     {% else  %}
                                     <td class="alert alert-danger text-white fw-bold text-center mb-0"
                                         style="width: 20%;">Non Validé</td>
