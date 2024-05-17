@@ -7,6 +7,16 @@
         body {
             font-family: 'Montserrat', sans-serif;
         }
+
+        @media (min-width : 1200px) {
+            .main-sidebar{
+                width: 16% !important;
+            }
+
+            .main-header{
+                width: 90% !important;
+            }
+        }
     </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,16 +50,16 @@
     {% endblock custom_css %}
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed mx-auto" style="font-family:'Montserrat'; width: 88%;">
-    <div class="wrapper" >
+<body class="hold-transition sidebar-mini layout-fixed mx-auto" style="font-family:'Montserrat';">
+    <div class="wrapper">
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav pb-4">
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                </li> -->
+                </li>
 
             </ul>
 
