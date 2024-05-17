@@ -1,23 +1,24 @@
 {% load static %}
-<aside class="main-sidebar sidebar-dark-info elevation-4">
+<aside class="main-sidebar elevation-4 sidebar-dark-info" style="width: 18%;">
     {% if request.user.user_type == '1' %}
     <!-- Brand Logo -->
     <a href="{% url 'admin_home' %}" class="brand-link">
         <img src="{% static 'dist/img/cmsl.png' %} " alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" >
-        <span class="brand-text font-weight-light">Admin Panel</span>
+        <span class="brand-text fw-bold text-white" style="font-size: small;">Panneau d'administration</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{ request.user.profile_pic}}" class="img-circle elevation-2" alt="User Image">
+        <div class="user-panel mt-3 pb-3 mb-3 text-center">
+            <div class="image text-center ">
+                <img src="{% static 'dist/img/logoiut.png' %}" class="img-circle elevation-2 bg-white w-50" alt="User Image">
             </div>
-            <div class="info">
-                <a href="#" class="d-block">{{user}}</a>
-            </div>
+        </div>
+        <div class="info  text-center">
+            <a href="#" class="d-block text-white">{{user}}</a>
+            <hr class="bg-white">
         </div>
 
         <!-- Sidebar Menu -->
@@ -27,10 +28,9 @@
                 <li class="nav-item">
                     {% url 'admin_home' as admin_home %}
                     <a href="{{admin_home}}" class="nav-link {% if admin_home == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-home text-white"></i>
                         <p>
-                            Home
-
+                            Acceuil
                         </p>
                     </a>
                 </li>
@@ -39,9 +39,8 @@
                     <a href="{{admin_view_profile}}"
                         class="nav-link {% if admin_view_profile == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-address-card"></i>
-                        <p>
-                            Update Profile
-
+                        <p class="text-white">
+                            Mettre à jour le profile
                         </p>
                     </a>
                 </li>

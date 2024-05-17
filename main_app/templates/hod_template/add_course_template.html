@@ -6,12 +6,12 @@
 
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
                 <!-- general form elements -->
                 <div class="card card-dark">
-                    <div class="card-header">
-                        <h3 class="card-title">{{page_title}}</h3>
+                    <div class="card-header text-center">
+                        <h3 class="card-title text-center">{{page_title}}</h3>
                     </div>
 
                     {% include "main_app/form_template.html" with messages=messages  form=form button_text="Add Course"%}
