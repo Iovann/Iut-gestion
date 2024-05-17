@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/iovann/Téléchargements/gestion-des-notes-main/env"
+set -gx VIRTUAL_ENV "/home/iovann/Iut-gestion/env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
