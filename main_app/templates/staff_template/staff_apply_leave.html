@@ -18,7 +18,7 @@
                 </div>
                 <!-- /.card -->
 <div class="card card-default">
-    <div class="card-header"><h3 class="card-title"><b>Leave History</b></h3>
+    <div class="card-header"><h3 class="card-title"><b>Historique des congés</b></h3>
    <div class="table">
 
        <table class="table table-bordered table-hover">
@@ -38,12 +38,12 @@
               <td>
                   
                   {% if leave.status == 0 %}
-                  <span class="badge badge-warning">Pending</span>
+                  <span class="badge badge-warning">En Attente</span>
                   {% elif leave.status == 1 %}
-                  <span class="badge badge-success">Accepted</span>
+                  <span class="badge badge-success">Accepté</span>
                   
                     {% else %}
-                    <span class="badge badge-danger">Rejected</span>
+                    <span class="badge badge-danger">Rejeté</span>
                     
                     {% endif %}
                     
