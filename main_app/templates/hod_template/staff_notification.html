@@ -18,10 +18,10 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>Full Name</th>
+                                    <th>Nom complet</th>
                                     <th>Email</th>
-                                    <th>Gender</th>
-                                    <th>Course</th>
+                                    <th>Genre</th>
+                                    <th>Filière</th>
                                     <th>Avatar</th>
                                     <th>Action</th>
                                 </tr>
@@ -36,13 +36,13 @@
                                     <td>{{staff.staff.course.name}}</td>
                                     <td>
                                         {% if staff.profile_pic == ""  %}
-                                        No Image
+                                        Pas d'image
                                         {% else %}
                                         <img class="img img-fluid mb-2" height="56" width="56"
                                             src="{{staff.profile_pic}}" alt="">
                                         {% endif %}
                                     </td>
-                                    <td><button data-toggle = "modal" data-target = "#myModal"class="btn btn-primary show_notification" value="{{staff.id}}">Send Notification</button> 
+                                    <td><button data-toggle = "modal" data-target = "#myModal"class="btn btn-primary show_notification" value="{{staff.id}}">Envoyer la notification</button> 
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -60,7 +60,7 @@
    <div class = "modal-dialog">
       <div class = "modal-content">
          
-         <div class = "modal-header">Send Notification
+         <div class = "modal-header">Envoyerla notification
             <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
                   &times;
             </button>
@@ -77,11 +77,11 @@
          
          <div class = "modal-footer">
             <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
-               Close
+               Fermer
             </button>
             
             <button type = "button" id='send' class = "btn btn-success send_notification">
-               Send Notification
+               Envoyer la notification
             </button>
          </div>
          

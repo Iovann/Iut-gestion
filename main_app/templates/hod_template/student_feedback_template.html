@@ -18,11 +18,11 @@
                         <table class="table table-bordered table-hover">
                             <tr>
                                 <th>#</th>
-                                <th>Student</th>
-                                <th>Session</th>
+                                <th>Etudiant</th>
+                                <th>Année Scolaire</th>
                                 <th>Message</th>
-                                <th>Sent On</th>
-                                <th>Replied On</th>
+                                <th>Envoyé le</th>
+                                <th>Répondu le</th>
                                 <th>Action</th>
 
                             </tr>
@@ -36,8 +36,8 @@
                                       
                                       {% if feedback.reply == "" %}
                                       <td>{{feedback.created_at}}</td>
-                                      <td><span  class='badge badge-warning'>Pending Response</span></td>
-                                           <td> <button data-toggle = "modal" data-target = "#reply_modal" value="{{feedback.id}}" class="btn btn-success reply_open_modal">Reply</button>
+                                      <td><span  class='badge badge-warning'>En Attente</span></td>
+                                           <td> <button data-toggle = "modal" data-target = "#reply_modal" value="{{feedback.id}}" class="btn btn-success reply_open_modal">Réponse</button>
                                           {% else %}
                                           <td>{{feedback.created_at}}</td>
                                           <td>{{feedback.updated_at}}</td>
@@ -84,7 +84,7 @@
                 Close
             </button>
             
-            <button id="reply_btn" class="btn btn-success btn-block">Reply</button>
+            <button id="reply_btn" class="btn btn-success btn-block">Reponse</button>
          
          </div>
          

@@ -18,10 +18,10 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
-                                    <th>Full Name</th>
+                                    <th>Nom Complet</th>
                                     <th>Email</th>
-                                    <th>Gender</th>
-                                    <th>Course</th>
+                                    <th>Genre</th>
+                                    <th>Filière</th>
                                     <th>Avatar</th>
                                     <th>Actions</th>
                                 </tr>
@@ -44,7 +44,7 @@
                                     </td>
                                     
                                     <td><a href="{% url 'edit_student' student.student.id %}" class="btn btn-info">Edit</a> -
-                                        <a href="{% url 'delete_student' student.student.id %}" class="btn btn-danger" onclick="return confirm('Are you sure about this ?')">Delete</a>
+                                        <a href="{% url 'delete_student' student.student.id %}" class="btn btn-danger" onclick="return confirm('Êtes vous sur de cela? ')">Delete</a>
 
                                     </td>
                                 </tr>

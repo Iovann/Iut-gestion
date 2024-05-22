@@ -18,11 +18,11 @@
                         <table class="table table-bordered table-hover">
                             <tr>
                                 <th>#</th>
-                                <th>Staff</th>
-                                <th>Course</th>
+                                <th>Personnel</th>
+                                <th>Filière</th>
                                 <th>Message</th>
-                                <th>Sent On</th>
-                                <th>Replied On</th>
+                                <th>Envoyé le</th>
+                                <th>Répondu le</th>
                                 <th>Action</th>
                             </tr>
                             {% for feedback in  feedbacks %}
@@ -35,8 +35,8 @@
                                             
                                     {% if feedback.reply == "" %}
                                     <td>{{feedback.created_at}}</td>
-                                    <td><span  class='badge badge-warning'>Pending Response</span></td>
-                                         <td> <button data-toggle = "modal" data-target = "#reply_modal" value="{{feedback.id}}" class="btn btn-success reply_open_modal">Reply</button>
+                                    <td><span  class='badge badge-warning'>Réponse en attente</span></td>
+                                         <td> <button data-toggle = "modal" data-target = "#reply_modal" value="{{feedback.id}}" class="btn btn-success reply_open_modal">Repondre</button>
                                         {% else %}
                                         <td>{{feedback.created_at}}</td>
                                         <td>{{feedback.updated_at}}</td>
@@ -73,16 +73,16 @@
          
          <div class = "modal-body">
              <input type="hidden"  id="id">
-           <p> Reply <span id="reply_name"></span></p>  
+           <p> Reponse <span id="reply_name"></span></p>  
            <textarea name="reply_message" id="reply_message" cols="30" rows="10" class="form-control"></textarea>
         </div>
         
         <div class = "modal-footer">
             <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
-                Close
+                Fermer
             </button>
             
-            <button id="reply_btn" class="btn btn-success btn-block">Reply</button>
+            <button id="reply_btn" class="btn btn-success btn-block">Réponse</button>
          
          </div>
          

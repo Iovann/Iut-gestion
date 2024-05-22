@@ -18,126 +18,125 @@
                         <table class="table table-bordered table-hover">
                             <tr>
                                 <th>#</th>
-                                <th>Student</th>
-                                <th>Course</th>
+                                <th>Etudiant</th>
+                                <th>Filière</th>
                                 <th>Message</th>
-                                <th>Leave Date</th>
-                                <th>Submitted On</th>
+                                <th>Date de congé</th>
+                                <th>Soumis le</th>
                                 <th>Action</th>
 
                             </tr>
-                            {% for leave in  allLeave %}
-                              <tr>
-                                  <td>{{forloop.counter}}</td>
-                                  <td>{{leave.student}}</td>
-                                  <td>{{leave.student.course}}</td>
-                                  <td>{{leave.message}}</td>
-                                  <td>{{leave.date}}</td>
-                                  <td>{{leave.created_at}}</td>
-                                 
-                                      
-                                      {% if leave.status == 0 %}
-                                           <td> <button data-toggle = "modal" data-target = "#reply_modal" value="{{leave.id}}" class="btn btn-success reply_open_modal">Reply</button>
-{% elif leave.status == -1 %}
-<td><span  class='badge badge-danger'>Rejected</span></td>
-{% else %}
-<td><span  class='badge badge-success'>Approved</span></td>
+                            {% for leave in allLeave %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{leave.student}}</td>
+                                <td>{{leave.student.course}}</td>
+                                <td>{{leave.message}}</td>
+                                <td>{{leave.date}}</td>
+                                <td>{{leave.created_at}}</td>
 
-                                            <td>{{feedback.updated_at}}</td>
-                                      {% endif %}
-                                          
-                                  </td>
-                       
-                              </tr>
+
+                                {% if leave.status == 0 %}
+                                <td> <button data-toggle="modal" data-target="#reply_modal" value="{{leave.id}}"
+                                        class="btn btn-success reply_open_modal">Reponse</button>
+                                    {% elif leave.status == -1 %}
+                                <td><span class='badge badge-danger'>Rejeté</span></td>
+                                {% else %}
+                                <td><span class='badge badge-success'>Approuvé</span></td>
+
+                                <td>{{feedback.updated_at}}</td>
+                                {% endif %}
+
+                                </td>
+
+                            </tr>
                             {% endfor %}
                         </table>
                     </div>
-                    </div>
+                </div>
                 <!-- /.card -->
 
             </div>
         </div>
     </div>
 </section>
-<div class = "modal fade" id = "reply_modal" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-   
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-         
-         <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
+<div class="modal fade" id="reply_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+
+                <h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="id">
+                <p> Répondre à la demande de congé de <span id="reply_name"></span></p>
+                <select id="reply_leave_status" class="form-control">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="1">Approuver</option>
+                    <option value="-1">Rejeter</option>
+                </select>
+            </div>
             
-            <h4 class = "modal-title" id = "myModalLabel">
-               
-            </h4>
-         </div>
-         
-         <div class = "modal-body">
-             <input type="hidden"  id="id">
-           <p> Reply To <span id="reply_name"></span>'s Leave Request</p>  
-           <select id="reply_leave_status" class="form-control">
-<option value="">-- Select --</option>
-<option value="1">Approve</option>
-<option value="-1">Reject</option>
-           </select>
-        </div>
-        
-        <div class = "modal-footer">
-            <button type = "button" class = "btn btn-danger" data-dismiss = "modal">
-                Close
-            </button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Fermer
+                </button>
             
-            <button id="reply_btn" class="btn btn-success btn-block">Submit</button>
-         
-         </div>
-         
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-  
+                <button id="reply_btn" class="btn btn-success btn-block">Soumettre</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
 </div><!-- /.modal -->
 {% endblock content %}
 {% block custom_js %}
-  <script>
-      $(document).ready(function(){
-          $(".reply_open_modal").click(function(){
-              var id = $(this).val()
-              var name = $(this).parents("tr").children("td:eq(1)").text()
-              $("#reply_name").text(name)
-              $("#id").val(id)
-              
-              
-            })
-            
-            $("#reply_btn").on("click", function(){
-                var id = $("#id").val()
-                var status = $("#reply_leave_status").val()
-                if (status == '1' || status == '-1'){
+<script>
+    $(document).ready(function () {
+        $(".reply_open_modal").click(function () {
+            var id = $(this).val()
+            var name = $(this).parents("tr").children("td:eq(1)").text()
+            $("#reply_name").text(name)
+            $("#id").val(id)
 
-    $.ajax({
-        url: "{% url 'view_student_leave' %}",
-        type:'POST',
-        data:{
-              id:id,
-              status:status
-        }
-    }).done(function(response){
-        if (response == "True"){
-            alert("Leave Response Has Been Saved!")
-            location.reload()
-        }else{
-            alert("Reply Could Not Be Sent")
-        }
-    }).fail(function(response){
-        alert("Error Occured. ")
+
+        })
+
+        $("#reply_btn").on("click", function () {
+            var id = $("#id").val()
+            var status = $("#reply_leave_status").val()
+            if (status == '1' || status == '-1') {
+
+                $.ajax({
+                    url: "{% url 'view_student_leave' %}",
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        status: status
+                    }
+                }).done(function (response) {
+                    if (response == "True") {
+                        alert("Leave Response Has Been Saved!")
+                        location.reload()
+                    } else {
+                        alert("Reply Could Not Be Sent")
+                    }
+                }).fail(function (response) {
+                    alert("Error Occured. ")
+                })
+            } else {
+                alert("Choose valid response")
+            }
+
+        })
     })
-}else{
-    alert("Choose valid response")
-}
-
-          })
-      })
-  </script>
+</script>
 {% endblock custom_js %}
