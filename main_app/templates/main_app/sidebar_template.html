@@ -51,7 +51,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-bookmark"></i>
                         <p>
-                            Course
+                            Filière
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -62,7 +62,7 @@
                                 class="nav-link  {% if add_course == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Add Course
+                                    Ajouter
 
                                 </p>
                             </a>
@@ -74,8 +74,7 @@
                                 class="nav-link  {% if edit_course == request.path or manage_course == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Manage Course
-
+                                    Gérer
                                 </p>
                             </a>
                         </li>
@@ -88,7 +87,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Subject
+                            Matière
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -99,7 +98,7 @@
                                 class="nav-link  {% if add_subject == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Add Subject
+                                    Ajouter
 
                                 </p>
                             </a>
@@ -111,7 +110,7 @@
                                 class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Manage Subject
+                                    Gérer
 
                                 </p>
                             </a>
@@ -135,7 +134,7 @@
                                 class="nav-link  {% if add_course == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Add UE
+                                    Ajouter
 
                                 </p>
                             </a>
@@ -147,7 +146,7 @@
                                 class="nav-link  {% if edit_ue == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Manage UE
+                                    Gérer
                                 </p>
                             </a>
                         </li>
@@ -162,7 +161,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-clock"></i>
                         <p>
-                            Session
+                            Année Scolaire
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -174,7 +173,7 @@
                                 class="nav-link  {% if add_session == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Add Session
+                                    Ajouter
 
                                 </p>
                             </a>
@@ -186,7 +185,7 @@
                                 class="nav-link  {% if edit_session == request.path or manage_session == request.path %} active {% endif %}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Manage Session
+                                    Gérer
 
                                 </p>
                             </a>
@@ -201,7 +200,7 @@
                     <a href="{{add_staff}}" class="nav-link {% if add_staff == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-user-plus"></i>
                         <p>
-                            Add Staff
+                            Ajouter du Personnel
 
                         </p>
                     </a>
@@ -214,8 +213,7 @@
                         class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Manage Staff
-
+                            Gérer le Personnel
                         </p>
                     </a>
                 </li>
@@ -224,7 +222,7 @@
                     <a href="{{add_student}}" class="nav-link  {% if add_student == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-user-plus"></i>
                         <p>
-                            Add Student
+                            Ajouter un étudiant
 
                         </p>
                     </a>
@@ -237,7 +235,7 @@
                         class="nav-link  {% if edit_student == request.path or manage_student == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Manage Student
+                            Gérer les etudiants
 
                         </p>
                     </a>
@@ -249,8 +247,7 @@
                         class="nav-link {% if admin_notify_staff == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
-                            Notify Staff
-
+                            Notifier le Personnel
                         </p>
                     </a>
                 </li>
@@ -260,7 +257,7 @@
                         class="nav-link {% if admin_notify_student == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
-                            Notify Student
+                            Notifier les Etudiants
 
                         </p>
                     </a>
@@ -274,7 +271,7 @@
                         class="nav-link  {% if admin_view_attendance == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                            View Attendance
+                            Voir la Présence
                         </p>
                     </a>
                 </li>
@@ -285,8 +282,7 @@
                         class="nav-link  {% if student_feedback_message == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-comment-alt"></i>
                         <p>
-                            Student Feedback
-
+                            Feedback des Etudiants
                         </p>
                     </a>
                 </li>
@@ -297,7 +293,7 @@
                         class="nav-link   {% if staff_feedback_message == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
-                            Staff Feedback
+                            Feedback du Personnel
 
                         </p>
                     </a>
@@ -309,8 +305,7 @@
                         class="nav-link  {% if view_staff_leave == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-check-double"></i>
                         <p>
-                            Staff Leave
-
+                            Congé du personnel
                         </p>
                     </a>
                 </li>
@@ -321,8 +316,7 @@
                         class="nav-link  {% if view_student_leave == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-check-double"></i>
                         <p>
-                            Student Leave
-
+                            Congé des Etudiant
                         </p>
                     </a>
                 </li>
@@ -332,7 +326,7 @@
                 <a href="#" class="brand-link">
                     <img src="{% static 'dist/img/AdminLTELogo.png' %} " alt="AdminLTE Logo"
                         class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span class="brand-text font-weight-light">Staff Panel</span>
+                    <span class="brand-text font-weight-light">Panneau du personnel</span>
                 </a>
 
                 <!-- Sidebar -->
@@ -358,8 +352,7 @@
                                     class="nav-link {% if staff_home == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
-                                        Home
-
+                                        Acceuil
                                     </p>
                                 </a>
                             </li>
@@ -370,8 +363,7 @@
                                     class="nav-link {% if staff_view_profile == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-address-card"></i>
                                     <p>
-                                        Update Profile
-
+                                        Mise à jour du profil
                                     </p>
                                 </a>
                             </li>
@@ -382,7 +374,7 @@
                                     class="nav-link {% if staff_add_result == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-poll"></i>
                                     <p>
-                                        Add Result
+                                        Ajouter une note
 
                                     </p>
                                 </a>
@@ -393,8 +385,7 @@
                                     class="nav-link {% if edit_student_result == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        Edit Result
-
+                                        Modifier une note
                                     </p>
                                 </a>
                             </li>
@@ -404,7 +395,7 @@
                                     class="nav-link {% if staff_take_attendance == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>
-                                        Take Attendance
+                                        Faire la présence
 
                                     </p>
                                 </a>
@@ -415,8 +406,7 @@
                                     class="nav-link {% if staff_update_attendance == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        View/Update Attendance
-
+                                        Afficher/Mettre à jour la présence
                                     </p>
                                 </a>
                             </li>
@@ -426,7 +416,7 @@
                                     class="nav-link {% if staff_view_notification == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-bell"></i>
                                     <p>
-                                        View Notifications
+                                        Voir les notifications
 
                                     </p>
                                 </a>
@@ -438,8 +428,7 @@
                                     class="nav-link {% if staff_apply_leave == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-check"></i>
                                     <p>
-                                        Apply For Leave
-
+                                        Demander un congé
                                     </p>
                                 </a>
                             </li>
@@ -451,7 +440,6 @@
                                     <i class="nav-icon fas fa-comment-alt"></i>
                                     <p>
                                         Feedback
-
                                     </p>
                                 </a>
                             </li>
@@ -462,7 +450,7 @@
 
                                 <img src="{% static 'dist/img/AdminLTELogo.png' %} " alt="AdminLTE Logo"
                                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                                <span class="brand-text font-weight-light">Student Panel</span>
+                                <span class="brand-text font-weight-light">Panneau de l'Etudiant</span>
                             </a>
 
                             <!-- Sidebar -->
@@ -489,8 +477,7 @@
                                                 class="nav-link {% if student_home == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-home"></i>
                                                 <p>
-                                                    Home
-
+                                                    Acceuil
                                                 </p>
                                             </a>
                                         </li>
@@ -501,8 +488,7 @@
                                                 class="nav-link {% if student_view_profile == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-address-card"></i>
                                                 <p>
-                                                    Update Profile
-
+                                                    Mettre à jour le profil
                                                 </p>
                                             </a>
                                         </li>
@@ -523,7 +509,6 @@
                                                 <i class="nav-icon fas fa-bell"></i>
                                                 <p>
                                                     View Notifications
-
                                                 </p>
                                             </a>
                                         </li>

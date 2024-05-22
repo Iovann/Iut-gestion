@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>C.M.S | Log In</title>
+    <title>IUT | Connexion</title>
+    <link rel="shortcut icon" href="{% statci %}" type="image/x-icon">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -17,6 +18,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
     <!-- Google Font: Source Sans Pro -->
+    <link rel="shortcut icon" href="{% static 'dist/img/logoiut.png' %}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Google Recaptcha     -->
     <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
@@ -70,13 +72,13 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    Se souvenir de moi
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-success btn-block">Log In</button>
+                            <button type="submit" class="btn btn-success btn-block">Connexion</button>
                         </div>
 
 
@@ -86,7 +88,7 @@
 
 
                 <p class="mb-1">
-                    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                    <a href="{% url 'password_reset' %}">Mot de passe oublié</a>
                 </p>
 
             </div>
