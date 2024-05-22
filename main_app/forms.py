@@ -33,20 +33,19 @@ class CustomUserForm(FormSettings):
             for field in CustomUserForm.Meta.fields:
                 self.fields[field].initial = instance.get(field)
             if self.instance.pk is not None:
-                self.fields['password'].widget.attrs['placeholder'] = "Fill this only if you wish to update password"
+                self.fields['password'].widget.attrs['placeholder'] = "Remplissez ceci uniquement si vous souhaitez mettre à jour le mot de passe"
 
     def clean_email(self, *args, **kwargs):
         formEmail = self.cleaned_data['email'].lower()
         if self.instance.pk is None:  # Insert
             if CustomUser.objects.filter(email=formEmail).exists():
-                raise forms.ValidationError(
-                    "The given email is already registered")
+                raise forms.ValidationError("L'adresse e-mail fournie est déjà enregistrée.")
         else:  # Update
             dbEmail = self.Meta.model.objects.get(
                 id=self.instance.pk).admin.email.lower()
             if dbEmail != formEmail:  # There has been changes
                 if CustomUser.objects.filter(email=formEmail).exists():
-                    raise forms.ValidationError("The given email is already registered")
+                    raise forms.ValidationError("L'adresse e-mail fournie est déjà enregistrée.")
 
         return formEmail
 

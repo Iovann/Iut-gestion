@@ -13,13 +13,13 @@ class EditResultView(View):
         resultForm.fields['subject'].queryset = Subject.objects.filter(staff=staff)
         context = {
             'form': resultForm,
-            'page_title': "Edit Student's Result"
+            'page_title': "Modifier les résultats de l'étudiant"
         }
         return render(request, "staff_template/edit_student_result.html", context)
 
     def post(self, request, *args, **kwargs):
         form = EditResultForm(request.POST)
-        context = {'form': form, 'page_title': "Edit Student's Result"}
+        context = {'form': form, 'page_title': "Modifier les résultats de l'étudiant"}
         if form.is_valid():
             try:
                 student = form.cleaned_data.get('student')
@@ -31,10 +31,10 @@ class EditResultView(View):
                 result.exam = exam
                 result.test = test
                 result.save()
-                messages.success(request, "Result Updated")
+                messages.success(request, "Résultat mis à jour")
                 return redirect(reverse('edit_student_result'))
             except Exception as e:
-                messages.warning(request, "Result Could Not Be Updated")
+                messages.warning(request, "Le résultat n'a pas pu être mis à jour")
         else:
-            messages.warning(request, "Result Could Not Be Updated")
+            messages.warning(request, "Le résultat n'a pas pu être mis à jour")
         return render(request, "staff_template/edit_student_result.html", context)

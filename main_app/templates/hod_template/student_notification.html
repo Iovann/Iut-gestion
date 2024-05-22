@@ -91,7 +91,9 @@
 
 </div><!-- /.modal -->
 {% endblock content %}
+
 {% block custom_js %}
+
 <script>
     $(".show_notification").click(function () {
         $("#student_id").val($(this).val())
@@ -99,9 +101,9 @@
     $(".send_notification").click(function () {
         var id = $("#student_id").val()
         var message = $("#message").val()
-        sendNotification(id, message);
+        envoyerNotification(id, message);
     })
-    function sendNotification(id, message) {
+    function envoyerNotification(id, message) {
         $.ajax({
             url: "{% url 'send_student_notification' %}",
             type: 'POST',
@@ -113,15 +115,15 @@
 
 
             if (response == 'True') {
-                alert("Notification Sent");
+                alert("Notification envoyée");
                 location.reload();
             } else {
-                alert("Notification could not be saved. Please try again.");
+                alert("La notification n'a pas pu être enregistrée. Veuillez réessayer.");
             }
 
 
         }).fail(function (response) {
-            alert("Error in saving token")
+            alert("Erreur lors de l'enregistrement du token")
         })
 
     }
