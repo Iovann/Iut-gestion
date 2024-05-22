@@ -26,7 +26,7 @@ def staff_home(request):
         subject_list.append(subject.name)
         attendance_list.append(attendance_count)
     context = {
-        'page_title': 'Staff Panel - ' + str(staff.admin.last_name) + ' (' + str(staff.course) + ')',
+        'page_title': 'Panneau du Personnel - ' + str(staff.admin.last_name) + ' (' + str(staff.course) + ')',
         'total_students': total_students,
         'total_attendance': total_attendance,
         'total_leave': total_leave,
@@ -44,7 +44,7 @@ def staff_take_attendance(request):
     context = {
         'subjects': subjects,
         'sessions': sessions,
-        'page_title': 'Take Attendance'
+        'page_title': 'Faire la présence'
     }
 
     return render(request, 'staff_template/staff_take_attendance.html', context)
@@ -101,7 +101,7 @@ def staff_update_attendance(request):
     context = {
         'subjects': subjects,
         'sessions': sessions,
-        'page_title': 'Update Attendance'
+        'page_title': 'Mettre à jour la présence'
     }
 
     return render(request, 'staff_template/staff_update_attendance.html', context)
@@ -150,7 +150,7 @@ def staff_apply_leave(request):
     context = {
         'form': form,
         'leave_history': LeaveReportStaff.objects.filter(staff=staff),
-        'page_title': 'Apply for Leave'
+        'page_title': "Demander un congé"
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -159,10 +159,10 @@ def staff_apply_leave(request):
                 obj.staff = staff
                 obj.save()
                 messages.success(
-                    request, "Application for leave has been submitted for review")
+                    request, "La demande de congé a été soumise pour examen.")
                 return redirect(reverse('staff_apply_leave'))
             except Exception:
-                messages.error(request, "Could not apply!")
+                messages.error(request, "Demande non effectuée")
         else:
             messages.error(request, "Form has errors!")
     return render(request, "staff_template/staff_apply_leave.html", context)
@@ -174,7 +174,7 @@ def staff_feedback(request):
     context = {
         'form': form,
         'feedbacks': FeedbackStaff.objects.filter(staff=staff),
-        'page_title': 'Add Feedback'
+        'page_title': 'Ajouter un Commentaire'
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -182,10 +182,10 @@ def staff_feedback(request):
                 obj = form.save(commit=False)
                 obj.staff = staff
                 obj.save()
-                messages.success(request, "Feedback submitted for review")
+                messages.success(request, "Commentaire soumis pour examen")
                 return redirect(reverse('staff_feedback'))
             except Exception:
-                messages.error(request, "Could not Submit!")
+                messages.error(request, "Soumission Impossible!")
         else:
             messages.error(request, "Form has errors!")
     return render(request, "staff_template/staff_feedback.html", context)
@@ -194,7 +194,7 @@ def staff_feedback(request):
 def staff_view_profile(request):
     staff = get_object_or_404(Staff, admin=request.user)
     form = StaffEditForm(request.POST or None, request.FILES or None,instance=staff)
-    context = {'form': form, 'page_title': 'View/Update Profile'}
+    context = {'form': form, 'page_title': 'Afficher/Modifier le profil'}
     if request.method == 'POST':
         try:
             if form.is_valid():
@@ -218,14 +218,14 @@ def staff_view_profile(request):
                 admin.gender = gender
                 admin.save()
                 staff.save()
-                messages.success(request, "Profile Updated!")
+                messages.success(request, "Profile mis à jour!")
                 return redirect(reverse('staff_view_profile'))
             else:
                 messages.error(request, "Invalid Data Provided")
                 return render(request, "staff_template/staff_view_profile.html", context)
         except Exception as e:
             messages.error(
-                request, "Error Occured While Updating Profile " + str(e))
+                request, "Une erreur s'est produite lors de la mise à jour du profil." + str(e))
             return render(request, "staff_template/staff_view_profile.html", context)
 
     return render(request, "staff_template/staff_view_profile.html", context)
@@ -248,7 +248,7 @@ def staff_view_notification(request):
     notifications = NotificationStaff.objects.filter(staff=staff)
     context = {
         'notifications': notifications,
-        'page_title': "View Notifications"
+        'page_title': "Afficher les notifications"
     }
     return render(request, "staff_template/staff_view_notification.html", context)
 
@@ -258,7 +258,7 @@ def staff_add_result(request):
     subjects = Subject.objects.filter(staff=staff)
     sessions = Session.objects.all()
     context = {
-        'page_title': 'Result Upload',
+        'page_title': 'Modification du Résultat',
         'subjects': subjects,
         'sessions': sessions,
     }
@@ -278,11 +278,11 @@ def staff_add_result(request):
                 data.exam = exam
                 data.test = test
                 data.save()
-                messages.success(request, "Scores Updated")
+                messages.success(request, "NOtes mis à jour")
             except:
                 result = StudentResult(student=student, subject=subject, test=test, exam=exam)
                 result.save()
-                messages.success(request, "Scores Saved")
+                messages.success(request, "NOtes sauvegarder")
         except Exception as e:
             messages.warning(request, "Error Occured While Processing Form")
     return render(request, "staff_template/staff_add_result.html", context)

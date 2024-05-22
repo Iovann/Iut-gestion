@@ -46,7 +46,7 @@ def student_home(request):
         'data_present': data_present,
         'data_absent': data_absent,
         'data_name': subject_name,
-        'page_title': 'Student Homepage'
+        'page_title': 'Page d\'acceuil de l\'Etudiant'
 
     }
     return render(request, 'student_template/home_content.html', context)
@@ -59,7 +59,7 @@ def student_view_attendance(request):
         course = get_object_or_404(Course, id=student.course.id)
         context = {
             'subjects': Subject.objects.filter(course=course),
-            'page_title': 'View Attendance'
+            'page_title': 'Afficher la présence'
         }
         return render(request, 'student_template/student_view_attendance.html', context)
     else:
@@ -92,7 +92,7 @@ def student_apply_leave(request):
     context = {
         'form': form,
         'leave_history': LeaveReportStudent.objects.filter(student=student),
-        'page_title': 'Apply for leave'
+        'page_title': "Demander un congé"
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -101,10 +101,10 @@ def student_apply_leave(request):
                 obj.student = student
                 obj.save()
                 messages.success(
-                    request, "Application for leave has been submitted for review")
+                    request, "La demande de congé a été soumise pour examen")
                 return redirect(reverse('student_apply_leave'))
             except Exception:
-                messages.error(request, "Could not submit")
+                messages.error(request, "Soumission Impossible")
         else:
             messages.error(request, "Form has errors!")
     return render(request, "student_template/student_apply_leave.html", context)
@@ -116,7 +116,7 @@ def student_feedback(request):
     context = {
         'form': form,
         'feedbacks': FeedbackStudent.objects.filter(student=student),
-        'page_title': 'Student Feedback'
+        'page_title': 'Feedback des etudiants'
 
     }
     if request.method == 'POST':
@@ -129,9 +129,9 @@ def student_feedback(request):
                     request, "Feedback submitted for review")
                 return redirect(reverse('student_feedback'))
             except Exception:
-                messages.error(request, "Could not Submit!")
+                messages.error(request, "Soumission Impossible")
         else:
-            messages.error(request, "Form has errors!")
+            messages.error(request, "Erreur dans le formulaire")
     return render(request, "student_template/student_feedback.html", context)
 
 
@@ -140,7 +140,7 @@ def student_view_profile(request):
     form = StudentEditForm(request.POST or None, request.FILES or None,
                            instance=student)
     context = {'form': form,
-               'page_title': 'View/Edit Profile'
+               'page_title': 'Afficher/modifier le profil'
                }
     if request.method == 'POST':
         try:
@@ -165,7 +165,7 @@ def student_view_profile(request):
                 admin.gender = gender
                 admin.save()
                 student.save()
-                messages.success(request, "Profile Updated!")
+                messages.success(request, "Profil mise à jour")
                 return redirect(reverse('student_view_profile'))
             else:
                 messages.error(request, "Invalid Data Provided")
@@ -192,7 +192,7 @@ def student_view_notification(request):
     notifications = NotificationStudent.objects.filter(student=student)
     context = {
         'notifications': notifications,
-        'page_title': "View Notifications"
+        'page_title': "Afficher les notifications"
     }
     return render(request, "student_template/student_view_notification.html", context)
 
