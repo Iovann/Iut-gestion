@@ -603,7 +603,7 @@ def view_student_leave(request):
         allLeave = LeaveReportStudent.objects.all()
         context = {
             'allLeave': allLeave,
-            'page_title': 'Demandes de congé des Etudiants'
+            'page_title': 'Demandes de permissions des Etudiants'
         }
         return render(request, "hod_template/student_leave_view.html", context)
     else:
