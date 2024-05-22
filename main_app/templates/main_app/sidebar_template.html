@@ -498,7 +498,7 @@
                                             <a href="{{student_view_attendance}}"
                                                 class="nav-link {% if student_view_attendance == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-calendar-alt"></i>
-                                                <p>View Attendance</p>
+                                                <p>Voir sa présence</p>
                                             </a>
                                         </li>
 
@@ -508,7 +508,7 @@
                                                 class="nav-link {% if student_view_notification == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-bell"></i>
                                                 <p>
-                                                    View Notifications
+                                                    Voir ces notifications
                                                 </p>
                                             </a>
                                         </li>
@@ -519,7 +519,7 @@
                                                 class="nav-link {% if student_apply_leave == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-check"></i>
                                                 <p>
-                                                    Apply For Leave
+                                                    Demander un congé
 
                                                 </p>
                                             </a>
@@ -555,11 +555,11 @@
 
                                         <li class="nav-item">
                                             <a href="{% url 'user_logout' %}"
-                                                onclick="return confirm('Your session would be terminated.\n\nProceed?')"
+                                                onclick="return confirm('Vous êtes sur le point de vous déconnecter.\n\nValider?')"
                                                 class="nav-link">
                                                 <i class="nav-icon fas fa-power-off"></i>
                                                 <p>
-                                                    Logout
+                                                    Déconnexion
                                                 </p>
                                             </a>
                                         </li>
