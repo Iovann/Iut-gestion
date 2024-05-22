@@ -1,2 +1,6 @@
 .vercel
+db.sqlite3
+.idea/
+__pycache__/
+env/
 .env
